@@ -47,7 +47,7 @@ if __name__ == "__main__":
     print("*"*60,"\n")
     
     #Run TnTorch cross function
-    t,info = tntt.cross(function = lambda i0,i1,i2,i3: tensor_entry([(i0,i1,i2,i3)],tensor_dim),ranks_tt = max_rank,domain = [tn.arange(tensor_dim[i]) for i in range(len(tensor_dim))],return_info=True)
+    t,info = tntt.cross(function = lambda i0,i1,i2,i3: tensor_entry([(i0,i1,i2,i3)],tensor_dim),ranks_tt = max_rank,domain = [tn.arange(tensor_dim[i]) for i in range(len(tensor_dim))],verbose = False,return_info=True)
     
     #Run an index conversion of the output info from tntorch and compute the actual rank observed
     I,J = indexingfunctions.torch_ind_extract(info)
@@ -55,4 +55,9 @@ if __name__ == "__main__":
 
     #Call core construction explicitly from osfunctions
     cores_torch = osfunctions.ltr_nested_construction(tensor_entry,I,J,sample_row,sample_col,actual_rank,tensor_dim)
+    error = tt_functions.sampled_error(tensor_entry,tensor_dim,1000,t.cores,cores_torch)
+    print("*"*60)
+    print("Errors for no oversampling:",error[0])
+    print("Error for oversampling    :",error[1])
+    print("*"*60,"\n")
 
