@@ -1000,15 +1000,15 @@ def tt_cross_os(tensor_entry,tensor_dim,sample_row,sample_col,min_rank = None,ma
     
     if sampling_type is None:
         cores = osfunctions.ltr_nested_construction(tensor_entry,FI,FJ,[0 for _ in range(len(tensor_dim)-1)],[0 for _ in range(len(tensor_dim)-1)],trunc_ranks,tensor_dim)
-    elif sampling_type == "Nested":
+    elif sampling_type == "Par":
         cores = osfunctions.ltr_nested_construction(tensor_entry,FI,FJ,sample_row,sample_col,trunc_ranks,tensor_dim)
-    elif sampling_type == "TwoNested":
+    elif sampling_type == "Par2":
         cores = osfunctions.two_sided_nested_constructionv2(tensor_entry,FI,FJ,sample_row,sample_col,trunc_ranks,tensor_dim)
-    elif sampling_type == "Nonnested":
+    elif sampling_type == "Seq":
         cores = osfunctions.ltr_nonnested_construction(tensor_entry,FI,FJ,sample_row,sample_col,trunc_ranks,tensor_dim)
-    elif sampling_type == "TwoNonnested":
+    elif sampling_type == "Seq2":
         cores = osfunctions.two_sided_nonnested_constructionv2(tensor_entry,FI,FJ,sample_row,sample_col,trunc_ranks,tensor_dim)
-    elif sampling_type == "Average":
+    elif sampling_type == "R":
         cores_left = osfunctions.ltr_nested_construction(tensor_entry,FI,FJ,sample_row,sample_col,trunc_ranks,tensor_dim)
         cores_right = osfunctions.rtl_nested_construction(tensor_entry,FI,FJ,sample_row,sample_col,trunc_ranks,tensor_dim)
         cores_add = tt_add(cores_left,cores_right,tensor_dim,trunc_ranks)
