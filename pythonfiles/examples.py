@@ -29,14 +29,14 @@ if __name__ == "__main__":
 
 
     """
-    Options for construction_type: None/empty   - no oversampling, just base TT-Cross (3.1)
-                                   Nested       - Algorithm 3.1
-                                   Nonnested    - Algorithm 3.2
-                                   TwoNested    - Algorithm 3.3
-                                   TwoNonnested - Algorithm 3.4
-                                   Average      - Algorithm 3.5
+    Options for construction_type: None/empty - no oversampling, just base TT-Cross (3.1)
+                                   Par        - Algorithm 3.1
+                                   Seq        - Algorithm 3.2
+                                   Par2       - Algorithm 3.3
+                                   Seq2       - Algorithm 3.4
+                                   R          - Algorithm 3.5
     """
-    construction_type = "Nested"
+    construction_type = "Par"
 
     cores_none =tt_functions.tt_cross_os(tensor_entry,tensor_dim,sample_row,sample_col,min_rank,max_rank,tol) 
     cores = tt_functions.tt_cross_os(tensor_entry,tensor_dim,sample_row,sample_col,min_rank,max_rank,tol,construction_type)
