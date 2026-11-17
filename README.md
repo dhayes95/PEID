@@ -33,7 +33,12 @@ Available tensors: Hilbert, Matern, ThinPlateSpline, 2d2v, 3d3v
 - Par-P: MPI based PEID-Par
 - Par2-P: MPI based PEID-Par2
 
-adap_toler = None means PEID will produce cores of the original TT rank produced by TTACA. Set this to a float value to adaptive truncation inside of PEID functions.
+`adap_toler=None` retains the ranks determined by the TTACA index sets.
+Set it to a numerical tolerance to enable adaptive rank selection.
+The R methods always round back to the original ranks.
+
+MPI methods require all processes to call the function, with at least
+one process per tensor dimension. Cores are returned on rank 0.
 
 ## Citation
 
